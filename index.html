@@ -13,7 +13,7 @@
     }
 
     header {
-      background-color: #d50000;
+      background-color: #1976d2;
       padding: 20px;
       text-align: center;
       font-size: 24px;
@@ -23,7 +23,7 @@
     }
 
     .button-back {
-      background-color: #d50000;
+      background-color: #1976d2;
       color: #fff;
       border: none;
       padding: 10px 20px;
@@ -35,7 +35,7 @@
     }
 
     .button-back:hover {
-      background-color: #b71c1c;
+      background-color: #1157a5;
     }
 
     .packages {
@@ -46,7 +46,7 @@
     }
 
     .package {
-      background-color: #f9f9f9;
+      background-color: #f4f8ff;
       padding: 20px;
       border-radius: 20px;
       text-align: center;
@@ -58,23 +58,12 @@
       transform: scale(1.05);
     }
 
-    .package img {
-      width: 60px;
-      margin-bottom: 10px;
-      animation: rotate 3s linear infinite;
-    }
-
-    @keyframes rotate {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
     .package p {
       margin: 5px 0;
     }
 
     .package button {
-      background-color: #d50000;
+      background-color: #1976d2;
       color: #fff;
       border: none;
       padding: 10px;
@@ -83,6 +72,11 @@
       margin-top: 10px;
       width: 100%;
       font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .package button:hover {
+      background-color: #1157a5;
     }
 
     #formulario {
@@ -103,7 +97,7 @@
     }
 
     #formulario button {
-      background-color: #d50000;
+      background-color: #1976d2;
       color: white;
       padding: 12px;
       border: none;
@@ -112,10 +106,15 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #formulario button:hover {
+      background-color: #1157a5;
     }
 
     a {
-      color: #d50000;
+      color: #1976d2;
       text-decoration: none;
     }
 
@@ -131,23 +130,31 @@
     }
 
     #popup {
-      background-color: #fff3f3;
+      background-color: #ffffff;
       color: #000;
-      padding: 30px;
+      padding: 30px 20px;
       max-width: 90%;
       margin: 100px auto;
       border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
       text-align: center;
+      border: 2px solid #1976d2;
     }
 
     #popup h2 {
-      color: #d50000;
-      margin-bottom: 20px;
+      color: #1976d2;
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+
+    #popup p {
+      font-size: 16px;
+      margin: 10px 0;
+      line-height: 1.5;
     }
 
     #popup button {
-      background-color: #d50000;
+      background-color: #1976d2;
       color: white;
       padding: 12px 25px;
       border: none;
@@ -156,6 +163,11 @@
       font-weight: bold;
       cursor: pointer;
       margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    #popup button:hover {
+      background-color: #1157a5;
     }
   </style>
 </head>
@@ -164,35 +176,31 @@
   <header>Pacotes Vodacom</header>
 
   <div id="popup">
-    <h2>AVISO IMPORTANTE</h2>
-    <p>Todos os nossos pacotes têm validade de <strong>30 dias</strong>.<br>
-    Ao adquirir um pacote de <strong>20GB ou superior</strong>, você garante um bônus exclusivo de <strong>4GB</strong> na sua primeira compra.</p>
-    <p>O pagamento é processado automaticamente e de forma segura via <strong>M-Pesa</strong> e <strong>E-Mola</strong>.</p>
-    <p>Utilize somente os canais oficiais e verifique os valores.</p>
-    <button onclick="fecharPopup()">Entendi</button>
+    <h2>Bem-vindo aos Pacotes Vodacom</h2>
+    <p><strong>Validade:</strong> Todos os pacotes têm duração de <strong>30 dias</strong>.</p>
+    <p><strong>Bônus:</strong> Comprando 20GB ou mais, você recebe <strong>4GB grátis</strong> na primeira compra.</p>
+    <p><strong>Pagamento:</strong> Via <strong>M-Pesa</strong> ou <strong>e-Mola</strong>, de forma segura e automática.</p>
+    <p>Use apenas os canais oficiais e confira os valores corretamente.</p>
+    <button onclick="fecharPopup()">Continuar</button>
   </div>
 
   <div id="pacotes" class="packages">
     <div class="package">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg" alt="Vodacom Moçambique">
       <p><strong>10GB - 115MT</strong></p>
       <p>30 dias</p>
       <button onclick="abrirFormulario('10GB - 115MT')">Comprar</button>
     </div>
     <div class="package">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg" alt="Vodacom Moçambique">
       <p><strong>20GB - 230MT</strong></p>
       <p>30 dias</p>
       <button onclick="abrirFormulario('20GB - 230MT')">Comprar</button>
     </div>
     <div class="package">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg" alt="Vodacom Moçambique">
       <p><strong>30GB - 345MT</strong></p>
       <p>30 dias</p>
       <button onclick="abrirFormulario('30GB - 345MT')">Comprar</button>
     </div>
     <div class="package">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg" alt="Vodacom Moçambique">
       <p><strong>40GB - 460MT</strong></p>
       <p>30 dias</p>
       <button onclick="abrirFormulario('40GB - 460MT')">Comprar</button>
