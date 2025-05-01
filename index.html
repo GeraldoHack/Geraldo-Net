@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Pacotes Vodacom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    header {
+      background-color: #1f1f1f;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .button-back {
+      background-color: #03a9f4;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      margin: 15px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-back:hover {
+      background-color: #0288d1;
+    }
+
+    .packages {
+      display: none;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .package {
+      background-color: #1f1f1f;
+      padding: 20px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      transition: transform 0.2s ease;
+    }
+
+    .package:hover {
+      transform: scale(1.05);
+    }
+
+    .package img {
+      width: 60px;
+      margin-bottom: 10px;
+    }
+
+    .package p {
+      margin: 5px 0;
+    }
+
+    .package button {
+      background-color: #e53935;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+      font-weight: bold;
+    }
+
+    #formulario {
+      display: none;
+      padding: 20px;
+      background-color: #1f1f1f;
+    }
+
+    #formulario input, #formulario select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      background-color: #2c2c2c;
+      color: white;
+    }
+
+    #formulario button {
+      background-color: #03a9f4;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
+      width: 100%;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    a {
+      color: #03a9f4;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    /* POP-UP AVISO */
+    #popup {
+      background-color: #1f1f1f;
+      color: #fff;
+      padding: 30px;
+      max-width: 90%;
+      margin: 100px auto;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      text-align: center;
+    }
+
+    #popup h2 {
+      color: #ff5252;
+      margin-bottom: 20px;
+    }
+
+    #popup button {
+      background-color: #03a9f4;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Pacotes Vodacom</header>
+
+  <!-- POP-UP AVISO -->
+  <div id="popup">
+    <h2>AVISO IMPORTANTE</h2>
+    <p>Todos os nossos pacotes têm validade de <strong>30 dias</strong>.<br>
+    Ao adquirir um pacote de <strong>20GB ou superior</strong>, você garante um bônus exclusivo de <strong>4GB</strong> na sua primeira compra.</p>
+    <p>O pagamento é processado automaticamente e de forma segura via <strong>M-Pesa</strong> e <strong>E-Mola</strong>.</p>
+    <p>Utilize somente os canais oficiais e verifique os valores.</p>
+    <button onclick="fecharPopup()">Entendi</button>
+  </div>
+
+  <div id="pacotes" class="packages">
+    <div class="package">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg">
+      <p><strong>10GB - 115MT</strong></p>
+      <p>30 dias</p>
+      <button onclick="abrirFormulario('10GB - 115MT')">Comprar</button>
+    </div>
+    <div class="package">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg">
+      <p><strong>20GB - 230MT</strong></p>
+      <p>30 dias</p>
+      <button onclick="abrirFormulario('20GB - 230MT')">Comprar</button>
+    </div>
+    <div class="package">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg">
+      <p><strong>30GB - 345MT</strong></p>
+      <p>30 dias</p>
+      <button onclick="abrirFormulario('30GB - 345MT')">Comprar</button>
+    </div>
+    <div class="package">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg">
+      <p><strong>40GB - 460MT</strong></p>
+      <p>30 dias</p>
+      <button onclick="abrirFormulario('40GB - 460MT')">Comprar</button>
+    </div>
+  </div>
+
+  <div id="formulario">
+    <button class="button-back" onclick="voltar()">← Voltar</button>
+    <h3>Preencher Dados</h3>
+    <select>
+      <option disabled selected>Escolha o método de pagamento</option>
+      <option>M-Pesa</option>
+      <option>e-Mola</option>
+    </select>
+    <input type="text" placeholder="Seu nome">
+    <input type="text" placeholder="Seu número (M-Pesa/e-Mola)">
+    <input type="text" placeholder="Número para receber o pacote">
+    <input type="text" id="pacoteSelecionado" readonly>
+    <button>Enviar Pedido</button>
+    <p style="text-align:center; margin-top: 15px;">
+      Está com dificuldades? <a href="https://wa.me/258XXXXXXXXX">Fale conosco</a>
+    </p>
+  </div>
+
+  <footer>&copy; 2025 - Seu App de Pacotes</footer>
+
+  <script>
+    function fecharPopup() {
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("pacotes").style.display = "grid";
+    }
+
+    function abrirFormulario(pacote) {
+      document.getElementById("pacotes").style.display = "none";
+      document.getElementById("formulario").style.display = "block";
+      document.getElementById("pacoteSelecionado").value = "Vodacom: " + pacote;
+    }
+
+    function voltar() {
+      document.getElementById("formulario").style.display = "none";
+      document.getElementById("pacotes").style.display = "grid";
+    }
+  </script>
+
+</body>
+</html>
