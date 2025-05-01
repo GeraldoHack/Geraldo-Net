@@ -8,12 +8,12 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #121212;
-      color: #ffffff;
+      background-color: #ffffff;
+      color: #000000;
     }
 
     header {
-      background-color: #1f1f1f;
+      background-color: #d50000;
       padding: 20px;
       text-align: center;
       font-size: 24px;
@@ -23,7 +23,7 @@
     }
 
     .button-back {
-      background-color: #03a9f4;
+      background-color: #d50000;
       color: #fff;
       border: none;
       padding: 10px 20px;
@@ -35,7 +35,7 @@
     }
 
     .button-back:hover {
-      background-color: #0288d1;
+      background-color: #b71c1c;
     }
 
     .packages {
@@ -46,11 +46,11 @@
     }
 
     .package {
-      background-color: #1f1f1f;
+      background-color: #f9f9f9;
       padding: 20px;
       border-radius: 20px;
       text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: transform 0.2s ease;
     }
 
@@ -61,6 +61,12 @@
     .package img {
       width: 60px;
       margin-bottom: 10px;
+      animation: rotate 3s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .package p {
@@ -68,7 +74,7 @@
     }
 
     .package button {
-      background-color: #e53935;
+      background-color: #d50000;
       color: #fff;
       border: none;
       padding: 10px;
@@ -82,22 +88,22 @@
     #formulario {
       display: none;
       padding: 20px;
-      background-color: #1f1f1f;
+      background-color: #ffffff;
     }
 
     #formulario input, #formulario select {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
-      border: none;
+      border: 1px solid #ccc;
       border-radius: 10px;
       font-size: 16px;
-      background-color: #2c2c2c;
-      color: white;
+      background-color: #f2f2f2;
+      color: #000;
     }
 
     #formulario button {
-      background-color: #03a9f4;
+      background-color: #d50000;
       color: white;
       padding: 12px;
       border: none;
@@ -109,7 +115,7 @@
     }
 
     a {
-      color: #03a9f4;
+      color: #d50000;
       text-decoration: none;
     }
 
@@ -121,28 +127,27 @@
       text-align: center;
       margin-top: 20px;
       font-size: 13px;
-      color: #ccc;
+      color: #555;
     }
 
-    /* POP-UP AVISO */
     #popup {
-      background-color: #1f1f1f;
-      color: #fff;
+      background-color: #fff3f3;
+      color: #000;
       padding: 30px;
       max-width: 90%;
       margin: 100px auto;
       border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
       text-align: center;
     }
 
     #popup h2 {
-      color: #ff5252;
+      color: #d50000;
       margin-bottom: 20px;
     }
 
     #popup button {
-      background-color: #03a9f4;
+      background-color: #d50000;
       color: white;
       padding: 12px 25px;
       border: none;
@@ -158,7 +163,6 @@
 
   <header>Pacotes Vodacom</header>
 
-  <!-- POP-UP AVISO -->
   <div id="popup">
     <h2>AVISO IMPORTANTE</h2>
     <p>Todos os nossos pacotes têm validade de <strong>30 dias</strong>.<br>
@@ -170,25 +174,25 @@
 
   <div id="pacotes" class="packages">
     <div class="package">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg" alt="Vodacom Moçambique">
       <p><strong>10GB - 115MT</strong></p>
       <p>30 dias</p>
       <button onclick="abrirFormulario('10GB - 115MT')">Comprar</button>
     </div>
     <div class="package">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg" alt="Vodacom Moçambique">
       <p><strong>20GB - 230MT</strong></p>
       <p>30 dias</p>
       <button onclick="abrirFormulario('20GB - 230MT')">Comprar</button>
     </div>
     <div class="package">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg" alt="Vodacom Moçambique">
       <p><strong>30GB - 345MT</strong></p>
       <p>30 dias</p>
       <button onclick="abrirFormulario('30GB - 345MT')">Comprar</button>
     </div>
     <div class="package">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Vodacom_logo.svg" alt="Vodacom Moçambique">
       <p><strong>40GB - 460MT</strong></p>
       <p>30 dias</p>
       <button onclick="abrirFormulario('40GB - 460MT')">Comprar</button>
