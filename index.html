@@ -10,10 +10,11 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: #ffffff;
       color: #000000;
+      overflow: hidden; /* Evita rolagem enquanto o popup está visível */
     }
 
     header {
-      background-color: #1976d2;
+      background-color: #007bff;
       padding: 20px;
       text-align: center;
       font-size: 24px;
@@ -23,19 +24,19 @@
     }
 
     .button-back {
-      background-color: #1976d2;
+      background-color: #007bff;
       color: #fff;
       border: none;
       padding: 10px 20px;
       border-radius: 30px;
-      margin: 15px;
+      margin: 15px 0;
       font-size: 14px;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
 
     .button-back:hover {
-      background-color: #1157a5;
+      background-color: #0056b3;
     }
 
     .packages {
@@ -46,9 +47,9 @@
     }
 
     .package {
-      background-color: #f4f8ff;
+      background-color: #f5f5f5;
       padding: 20px;
-      border-radius: 20px;
+      border-radius: 15px;
       text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: transform 0.2s ease;
@@ -59,11 +60,12 @@
     }
 
     .package p {
-      margin: 5px 0;
+      margin: 8px 0;
+      font-weight: 500;
     }
 
     .package button {
-      background-color: #1976d2;
+      background-color: #007bff;
       color: #fff;
       border: none;
       padding: 10px;
@@ -72,11 +74,6 @@
       margin-top: 10px;
       width: 100%;
       font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .package button:hover {
-      background-color: #1157a5;
     }
 
     #formulario {
@@ -85,19 +82,18 @@
       background-color: #ffffff;
     }
 
-    #formulario input, #formulario select {
+    #formulario input,
+    #formulario select {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 10px;
       font-size: 16px;
-      background-color: #f2f2f2;
-      color: #000;
     }
 
     #formulario button {
-      background-color: #1976d2;
+      background-color: #007bff;
       color: white;
       padding: 12px;
       border: none;
@@ -106,15 +102,10 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    #formulario button:hover {
-      background-color: #1157a5;
     }
 
     a {
-      color: #1976d2;
+      color: #007bff;
       text-decoration: none;
     }
 
@@ -124,37 +115,46 @@
 
     footer {
       text-align: center;
-      margin-top: 20px;
+      margin: 20px 0;
       font-size: 13px;
       color: #555;
     }
 
+    /* POP-UP AVISO */
+    #popup-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
     #popup {
       background-color: #ffffff;
-      color: #000;
-      padding: 30px 20px;
-      max-width: 90%;
-      margin: 100px auto;
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      color: #000000;
+      padding: 30px 25px;
+      max-width: 400px;
+      width: 90%;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
       text-align: center;
-      border: 2px solid #1976d2;
     }
 
     #popup h2 {
-      color: #1976d2;
+      color: #007bff;
       margin-bottom: 15px;
-      font-size: 22px;
     }
 
     #popup p {
-      font-size: 16px;
       margin: 10px 0;
       line-height: 1.5;
     }
 
     #popup button {
-      background-color: #1976d2;
+      background-color: #007bff;
       color: white;
       padding: 12px 25px;
       border: none;
@@ -163,11 +163,6 @@
       font-weight: bold;
       cursor: pointer;
       margin-top: 20px;
-      transition: background-color 0.3s ease;
-    }
-
-    #popup button:hover {
-      background-color: #1157a5;
     }
   </style>
 </head>
@@ -175,13 +170,16 @@
 
   <header>Pacotes Vodacom</header>
 
-  <div id="popup">
-    <h2>Bem-vindo aos Pacotes Vodacom</h2>
-    <p><strong>Validade:</strong> Todos os pacotes têm duração de <strong>30 dias</strong>.</p>
-    <p><strong>Bônus:</strong> Comprando 20GB ou mais, você recebe <strong>4GB grátis</strong> na primeira compra.</p>
-    <p><strong>Pagamento:</strong> Via <strong>M-Pesa</strong> ou <strong>e-Mola</strong>, de forma segura e automática.</p>
-    <p>Use apenas os canais oficiais e confira os valores corretamente.</p>
-    <button onclick="fecharPopup()">Continuar</button>
+  <!-- POP-UP AVISO -->
+  <div id="popup-container">
+    <div id="popup">
+      <h2>AVISO IMPORTANTE</h2>
+      <p><strong>Todos os nossos pacotes têm validade de 30 dias.</strong></p>
+      <p>Ao adquirir um pacote de <strong>20GB ou superior</strong>, você garante um bônus exclusivo de <strong>4GB</strong> na sua primeira compra.</p>
+      <p>O pagamento é feito automaticamente via <strong>M-Pesa</strong> ou <strong>E-Mola</strong>, com total segurança.</p>
+      <p>Use apenas os canais oficiais e verifique sempre os valores.</p>
+      <button onclick="fecharPopup()">Entendi</button>
+    </div>
   </div>
 
   <div id="pacotes" class="packages">
@@ -229,8 +227,9 @@
 
   <script>
     function fecharPopup() {
-      document.getElementById("popup").style.display = "none";
+      document.getElementById("popup-container").style.display = "none";
       document.getElementById("pacotes").style.display = "grid";
+      document.body.style.overflow = "auto"; // Ativa rolagem novamente
     }
 
     function abrirFormulario(pacote) {
