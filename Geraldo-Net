@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geraldo-Net</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+
+    .section-title {
+      margin: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      padding: 0 20px 40px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .card img {
+      width: 50px;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .btn {
+      margin-top: 12px;
+      background-color: #ff3d00;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #e63600;
+    }
+
+    #form-page {
+      display: none;
+      padding: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    #back-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      background: #f8f8f8;
+      text-align: center;
+      padding: 15px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .help-text {
+      text-align: center;
+      font-size: 14px;
+      margin-top: -10px;
+      margin-bottom: 20px;
+    }
+
+    .help-text a {
+      color: #007bff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Pacotes de Internet</h1>
+  </header>
+
+  <div id="packages-page">
+    <div class="section-title">Diários</div>
+    <div class="grid">
+      <div class="card" onclick="selectPackage('1GB - 20MT')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Vodacom_logo.svg" alt="logo" />
+        <h3>1GB - 20MT</h3>
+        <p>Válido por 1 dia</p>
+        <button class="btn">Comprar</button>
+      </div>
+      <div class="card" onclick="selectPackage('2GB - 40MT')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Vodacom_logo.svg" />
+        <h3>2GB - 40MT</h3>
+        <p>Válido por 1 dia</p>
+        <button class="btn">Comprar</button>
+      </div>
+      <div class="card" onclick="selectPackage('5GB - 100MT')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Vodacom_logo.svg" />
+        <h3>5GB - 100MT</h3>
+        <p>Válido por 1 dia</p>
+        <button class="btn">Comprar</button>
+      </div>
+      <div class="card" onclick="selectPackage('10GB - 200MT')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Vodacom_logo.svg" />
+        <h3>10GB - 200MT</h3>
+        <p>Válido por 1 dia</p>
+        <button class="btn">Comprar</button>
+      </div>
+    </div>
+
+    <div class="section-title">Semanais</div>
+    <div class="grid">
+      <div class="card" onclick="selectPackage('3GB - 70MT')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Vodacom_logo.svg" />
+        <h3>3GB - 70MT</h3>
+        <p>Válido por 7 dias</p>
+        <button class="btn">Comprar</button>
+      </div>
+      <div class="card" onclick="selectPackage('5GB - 115MT')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Vodacom_logo.svg" />
+        <h3>5GB - 115MT</h3>
+        <p>Válido por 7 dias</p>
+        <button class="btn">Comprar</button>
+      </div>
+      <div class="card" onclick="selectPackage('10GB - 215MT')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Vodacom_logo.svg" />
+        <h3>10GB - 215MT</h3>
+        <p>Válido por 7 dias</p>
+        <button class="btn">Comprar</button>
+      </div>
+    </div>
+
+    <div class="section-title">Mensais</div>
+    <div class="grid">
+      <div class="card" onclick="selectPackage('12GB - 300MT (Sem txuna)')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Vodacom_logo.svg" />
+        <h3>12GB - 300MT</h3>
+        <p>Válido por 30 dias</p>
+        <button class="btn">Comprar</button>
+      </div>
+      <div class="card" onclick="selectPackage('22GB - 500MT (Sem txuna)')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Vodacom_logo.svg" />
+        <h3>22GB - 500MT</h3>
+        <p>Válido por 30 dias</p>
+        <button class="btn">Comprar</button>
+      </div>
+      <div class="card" onclick="selectPackage('50GB - 1100MT (Sem txuna)')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Vodacom_logo.svg" />
+        <h3>50GB - 1100MT</h3>
+        <p>Válido por 30 dias</p>
+        <button class="btn">Comprar</button>
+      </div>
+      <div class="card" onclick="selectPackage('100GB - 2000MT (Sem txuna)')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Vodacom_logo.svg" />
+        <h3>100GB - 2000MT</h3>
+        <p>Válido por 30 dias</p>
+        <button class="btn">Comprar</button>
+      </div>
+    </div>
+
+    <div class="help-text">
+      Em dúvida? <a href="https://wa.me/25884XXXXXXX">Clique aqui</a>
+    </div>
+  </div>
+
+  <div id="form-page">
+    <button id="back-btn" onclick="goBack()">Voltar</button>
+    <h2>Preencher Informações</h2>
+    <form id="info-form">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" required>
+
+      <label for="numero">Número Vodafone</label>
+      <input type="text" id="numero" required placeholder="Ex: 84xxxxxxx">
+
+      <label for="pagamento">Forma de pagamento</label>
+      <select id="pagamento" required>
+        <option value="">Selecione</option>
+        <option value="M-Pesa">M-Pesa</option>
+        <option value="E-Mola">E-Mola</option>
+      </select>
+
+      <input type="hidden" id="pacote-escolhido">
+      <button class="btn" type="submit">Enviar Pedido</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2025 Geraldo-Net Todos os direitos reservados.
+  </footer>
+
+  <script>
+    function selectPackage(pacote) {
+      document.getElementById("packages-page").style.display = "none";
+      document.getElementById("form-page").style.display = "block";
+      document.getElementById("pacote-escolhido").value = pacote;
+    }
+
+    function goBack() {
+      document.getElementById("packages-page").style.display = "block";
+      document.getElementById("form-page").style.display = "none";
+    }
+
+    document.getElementById("info-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const nome = document.getElementById("nome").value;
+      const numero = document.getElementById("numero").value;
+      const pagamento = document.getElementById("pagamento").value;
+      const pacote = document.getElementById("pacote-escolhido").value;
+
+      const msg = `*Pedido de Internet*%0A%0A*Nome:* ${nome}%0A*Número:* ${numero}%0A*Pagamento:* ${pagamento}%0A*Pacote:* ${pacote}`;
+      const whatsapp = "258847347239"; // Coloque seu número aqui
+      window.open(`https://wa.me/${whatsapp}?text=${msg}`, "_blank");
+    });
+  </script>
+
+</body>
+</html>
