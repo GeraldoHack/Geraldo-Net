@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+</body>
+</html><!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
@@ -171,6 +172,57 @@
       margin-bottom: 10px;
       display: none;
     }
+
+    /* Estilo para o popup de confirmação M-Pesa */
+    #mpesa-popup {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 30px 25px;
+      max-width: 400px;
+      width: 90%;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    #mpesa-popup h2 {
+      color: #e60000;
+      margin-bottom: 15px;
+    }
+
+    #mpesa-popup .mpesa-logo {
+      width: 100px;
+      margin-bottom: 15px;
+    }
+
+    #mpesa-popup .input-pin {
+      width: 100%;
+      padding: 12px;
+      margin: 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+      text-align: center;
+      letter-spacing: 5px;
+    }
+
+    #mpesa-popup .mpesa-instructions {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    #mpesa-popup .mpesa-amount {
+      font-size: 24px;
+      font-weight: bold;
+      color: #e60000;
+      margin: 10px 0;
+    }
+
+    #mpesa-popup .mpesa-number {
+      font-weight: bold;
+      color: #007bff;
+    }
   </style>
 </head>
 <body>
@@ -189,16 +241,33 @@
     </div>
   </div>
 
+  <!-- POP-UP M-PESA -->
+  <div id="mpesa-popup-container" style="display: none;">
+    <div id="mpesa-popup">
+      <img src="https://www.vodacom.co.mz/img/mpesa-logo.png" alt="M-Pesa" class="mpesa-logo">
+      <h2>Confirmação de Pagamento</h2>
+      <p class="mpesa-instructions">Você receberá um pedido de confirmação no seu número M-Pesa. Por favor, insira seu PIN abaixo para confirmar o pagamento.</p>
+      
+      <div class="mpesa-amount" id="mpesa-amount-display">0 MT</div>
+      <p>Para: <span class="mpesa-number" id="mpesa-recipient">847347239</span></p>
+      
+      <input type="password" class="input-pin" id="mpesa-pin" placeholder="PIN M-Pesa" maxlength="4" oninput="this.value = this.value.replace(/\D/g,'')">
+      
+      <button onclick="confirmarPagamento()">Confirmar Pagamento</button>
+      <button onclick="fecharMpesaPopup()" style="background-color: #ccc; color: #333; margin-top: 10px;">Cancelar</button>
+    </div>
+  </div>
+
   <div id="pacotes" class="packages">
     <!-- Lista de pacotes -->
-    <div class="package"><p><strong>10GB - 115MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('10GB - 115MT')">Comprar</button></div>
-    <div class="package"><p><strong>20GB - 230MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('20GB - 230MT')">Comprar</button></div>
-    <div class="package"><p><strong>30GB - 345MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('30GB - 345MT')">Comprar</button></div>
-    <div class="package"><p><strong>40GB - 460MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('40GB - 460MT')">Comprar</button></div>
-    <div class="package"><p><strong>50GB - 575MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('50GB - 575MT')">Comprar</button></div>
-    <div class="package"><p><strong>60GB - 690MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('60GB - 690MT')">Comprar</button></div>
-    <div class="package"><p><strong>80GB - 920MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('80GB - 920MT')">Comprar</button></div>
-    <div class="package"><p><strong>100GB - 1150MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('100GB - 1150MT')">Comprar</button></div>
+    <div class="package"><p><strong>10GB - 115MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('10GB - 115MT', 115)">Comprar</button></div>
+    <div class="package"><p><strong>20GB - 230MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('20GB - 230MT', 230)">Comprar</button></div>
+    <div class="package"><p><strong>30GB - 345MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('30GB - 345MT', 345)">Comprar</button></div>
+    <div class="package"><p><strong>40GB - 460MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('40GB - 460MT', 460)">Comprar</button></div>
+    <div class="package"><p><strong>50GB - 575MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('50GB - 575MT', 575)">Comprar</button></div>
+    <div class="package"><p><strong>60GB - 690MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('60GB - 690MT', 690)">Comprar</button></div>
+    <div class="package"><p><strong>80GB - 920MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('80GB - 920MT', 920)">Comprar</button></div>
+    <div class="package"><p><strong>100GB - 1150MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('100GB - 1150MT', 1150)">Comprar</button></div>
   </div>
 
   <div id="formulario">
@@ -215,6 +284,7 @@
       <div id="errorPagamento" class="error-message">O número deve começar com 84 ou 85 e ter 9 dígitos</div>
       <input type="text" id="numeroPacote" name="numeroPacote" placeholder="Número para receber o pacote" required oninput="validarNumero(this, 'errorPacote')">
       <div id="errorPacote" class="error-message">O número deve começar com 84 ou 85 e ter 9 dígitos</div>
+      <input type="hidden" id="valorPacote" name="valorPacote">
       <input type="text" id="pacoteSelecionado" name="pacote" readonly>
       <button type="submit">Enviar Pedido</button>
     </form>
@@ -226,16 +296,27 @@
   <footer>&copy; 2025 - Seu App de Pacotes</footer>
 
   <script>
+    // Variáveis globais para armazenar os dados do pedido
+    let currentOrder = {
+      nome: '',
+      metodo: '',
+      numeroPagamento: '',
+      numeroPacote: '',
+      pacote: '',
+      valor: 0
+    };
+
     function fecharPopup() {
       document.getElementById("popup-container").style.display = "none";
       document.getElementById("pacotes").style.display = "grid";
       document.body.style.overflow = "auto";
     }
 
-    function abrirFormulario(pacote) {
+    function abrirFormulario(pacote, valor) {
       document.getElementById("pacotes").style.display = "none";
       document.getElementById("formulario").style.display = "block";
       document.getElementById("pacoteSelecionado").value = "Vodacom: " + pacote;
+      document.getElementById("valorPacote").value = valor;
     }
 
     function voltar() {
@@ -276,16 +357,96 @@
         return;
       }
 
-      const nome = document.getElementById("nome").value;
-      const metodo = document.getElementById("metodo").value;
-      const numeroPagamento = document.getElementById("numeroPagamento").value;
-      const numeroPacote = document.getElementById("numeroPacote").value;
-      const pacote = document.getElementById("pacoteSelecionado").value;
+      // Armazenar os dados do pedido
+      currentOrder.nome = document.getElementById("nome").value;
+      currentOrder.metodo = document.getElementById("metodo").value;
+      currentOrder.numeroPagamento = document.getElementById("numeroPagamento").value;
+      currentOrder.numeroPacote = document.getElementById("numeroPacote").value;
+      currentOrder.pacote = document.getElementById("pacoteSelecionado").value;
+      currentOrder.valor = document.getElementById("valorPacote").value;
 
-      const mensagem = `Olá! Gostaria de adquirir o seguinte pacote:\n\n${pacote}\n\nNome: ${nome}\nMétodo de Pagamento: ${metodo}\nNúmero de Pagamento: ${numeroPagamento}\nNúmero para receber o pacote: ${numeroPacote}`;
+      // Verificar se o método é M-Pesa
+      if (currentOrder.metodo === "M-Pesa") {
+        abrirMpesaPopup();
+      } else {
+        // Para e-Mola ou outros métodos, enviar diretamente para o WhatsApp
+        enviarParaWhatsApp();
+      }
+    }
+
+    function abrirMpesaPopup() {
+      document.getElementById("mpesa-popup-container").style.display = "flex";
+      document.getElementById("mpesa-amount-display").textContent = currentOrder.valor + " MT";
+      document.getElementById("mpesa-recipient").textContent = "847347239"; // Seu número para receber o pagamento
+      document.getElementById("mpesa-pin").value = "";
+      document.body.style.overflow = "hidden";
+    }
+
+    function fecharMpesaPopup() {
+      document.getElementById("mpesa-popup-container").style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+
+    function confirmarPagamento() {
+      const pin = document.getElementById("mpesa-pin").value;
+      
+      if (pin.length !== 4) {
+        alert("Por favor, insira um PIN M-Pesa válido de 4 dígitos.");
+        return;
+      }
+
+      // Simular processamento do pagamento
+      document.getElementById("mpesa-popup").innerHTML = `
+        <img src="https://www.vodacom.co.mz/img/mpesa-logo.png" alt="M-Pesa" class="mpesa-logo">
+        <h2>Processando Pagamento</h2>
+        <div style="margin: 20px 0;">
+          <div class="loader" style="border: 5px solid #f3f3f3; border-top: 5px solid #e60000; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+        </div>
+        <p>Por favor, aguarde enquanto processamos seu pagamento...</p>
+      `;
+
+      // Simular atraso no processamento
+      setTimeout(() => {
+        // Aqui você faria a chamada à API M-Pesa
+        // processarPagamentoMpesa(currentOrder.numeroPagamento, currentOrder.valor, pin);
+        
+        // Simular sucesso no pagamento
+        pagamentoSucesso();
+      }, 3000);
+    }
+
+    function processarPagamentoMpesa(numero, valor, pin) {
+      // Esta função seria implementada com a API real do M-Pesa
+      // Usando o código Python que você forneceu como referência
+      console.log(`Processando pagamento M-Pesa para ${numero}, valor: ${valor}, PIN: ****`);
+      
+      // Retornar uma promessa simulada
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({ success: true, transactionId: "T" + Math.floor(Math.random() * 1000000) });
+        }, 2000);
+      });
+    }
+
+    function pagamentoSucesso() {
+      // Mostrar mensagem de sucesso
+      document.getElementById("mpesa-popup").innerHTML = `
+        <img src="https://www.vodacom.co.mz/img/mpesa-logo.png" alt="M-Pesa" class="mpesa-logo">
+        <h2 style="color: #4CAF50;">Pagamento Confirmado!</h2>
+        <p>Obrigado por sua compra. Seu pacote será ativado em breve.</p>
+        <p>Número de confirmação: <strong>T${Math.floor(Math.random() * 1000000)}</strong></p>
+        <button onclick="fecharMpesaPopup(); enviarParaWhatsApp()">Concluir</button>
+      `;
+    }
+
+    function enviarParaWhatsApp() {
+      const mensagem = `Olá! Gostaria de adquirir o seguinte pacote:\n\n${currentOrder.pacote}\n\nNome: ${currentOrder.nome}\nMétodo de Pagamento: ${currentOrder.metodo}\nNúmero de Pagamento: ${currentOrder.numeroPagamento}\nNúmero para receber o pacote: ${currentOrder.numeroPacote}\nValor: ${currentOrder.valor} MT\n\nPagamento confirmado via ${currentOrder.metodo}.`;
 
       const link = `https://wa.me/258847347239?text=${encodeURIComponent(mensagem)}`;
       window.open(link, '_blank');
+      
+      // Fechar o popup M-Pesa se ainda estiver aberto
+      fecharMpesaPopup();
     }
   </script>
 
