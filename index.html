@@ -1,149 +1,268 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Pacotes Vodacom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      background: #f2f2f2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+      overflow: hidden;
     }
 
-    .container {
-      margin-top: 20px;
-      max-width: 600px;
-      width: 90%;
-    }
-
-    .pacote {
-      background: white;
+    header {
+      background-color: #007bff;
       padding: 20px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
-    .pacote h3 {
-      margin: 0 0 10px;
-      font-size: 20px;
-      color: #333;
-    }
-
-    .pacote p {
-      margin: 5px 0;
-      color: #555;
-    }
-
-    .botao-comprar {
-      background-color: #007BFF;
-      color: white;
+    .button-back {
+      background-color: #007bff;
+      color: #fff;
       border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
+      padding: 10px 20px;
+      border-radius: 30px;
+      margin: 15px 0;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-back:hover {
+      background-color: #0056b3;
+    }
+
+    .packages {
+      display: none;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .package {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .package:hover {
+      transform: scale(1.05);
+    }
+
+    .package p {
+      margin: 8px 0;
+      font-weight: 500;
+    }
+
+    .package button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 25px;
       cursor: pointer;
       margin-top: 10px;
+      width: 100%;
+      font-weight: bold;
+    }
+
+    #formulario {
+      display: none;
+      padding: 20px;
+      background-color: #ffffff;
+    }
+
+    #formulario input,
+    #formulario select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
       font-size: 16px;
     }
 
-    .popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-      z-index: 1000;
-      width: 90%;
-      max-width: 400px;
+    #formulario button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
+      width: 100%;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
-    .overlay {
-      display: none;
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #555;
+    }
+
+    #popup-container {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.4);
-      z-index: 999;
+      background-color: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
     }
 
-    .fechar {
-      background: red;
+    #popup {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 30px 25px;
+      max-width: 400px;
+      width: 90%;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    #popup h2 {
+      color: #007bff;
+      margin-bottom: 15px;
+    }
+
+    #popup p {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+
+    #popup button {
+      background-color: #007bff;
       color: white;
-      padding: 5px 10px;
+      padding: 12px 25px;
       border: none;
-      border-radius: 5px;
-      float: right;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-<div class="container" id="lista-pacotes">
-  <!-- Os pacotes serão inseridos aqui -->
-</div>
+  <header>Pacotes Vodacom</header>
 
-<div class="overlay" id="overlay"></div>
+  <!-- POP-UP AVISO -->
+  <div id="popup-container">
+    <div id="popup">
+      <h2>AVISO IMPORTANTE</h2>
+      <p><strong>Todos os nossos pacotes têm validade de 30 dias.</strong></p>
+      <p>Ao adquirir um pacote de <strong>20GB ou superior</strong>, você garante um bônus exclusivo de <strong>4GB</strong> na sua primeira compra.</p>
+      <p>O pagamento é feito automaticamente via <strong>M-Pesa</strong> ou <strong>E-Mola</strong>, com total segurança.</p>
+      <p>Use apenas os canais oficiais e verifique sempre os valores.</p>
+      <button onclick="fecharPopup()">Entendi</button>
+    </div>
+  </div>
 
-<div class="popup" id="popup">
-  <button class="fechar" onclick="fecharPopup()">Fechar</button>
-  <h3 id="popupTitulo"></h3>
-  <p id="popupPreco"></p>
-  <p id="popupValidade"></p>
-  <p>Operadora: Vodacom</p>
-</div>
+  <div id="pacotes" class="packages">
+    <div class="package">
+      <p><strong>10GB - 115MT</strong></p>
+      <p>30 dias</p>
+      <button onclick="abrirFormulario('10GB - 115MT')">Comprar</button>
+    </div>
+    <div class="package">
+      <p><strong>20GB - 230MT</strong></p>
+      <p>30 dias</p>
+      <button onclick="abrirFormulario('20GB - 230MT')">Comprar</button>
+    </div>
+    <div class="package">
+      <p><strong>30GB - 345MT</strong></p>
+      <p>30 dias</p>
+      <button onclick="abrirFormulario('30GB - 345MT')">Comprar</button>
+    </div>
+    <div class="package">
+      <p><strong>40GB - 460MT</strong></p>
+      <p>30 dias</p>
+      <button onclick="abrirFormulario('40GB - 460MT')">Comprar</button>
+    </div>
+    <!-- Pacotes adicionais -->
+    <div class="package">
+      <p><strong>50GB - 575MT</strong></p>
+      <p>30 dias</p>
+      <button onclick="abrirFormulario('50GB - 575MT')">Comprar</button>
+    </div>
+    <div class="package">
+      <p><strong>60GB - 690MT</strong></p>
+      <p>30 dias</p>
+      <button onclick="abrirFormulario('60GB - 690MT')">Comprar</button>
+    </div>
+    <div class="package">
+      <p><strong>80GB - 920MT</strong></p>
+      <p>30 dias</p>
+      <button onclick="abrirFormulario('80GB - 920MT')">Comprar</button>
+    </div>
+    <div class="package">
+      <p><strong>100GB - 1150MT</strong></p>
+      <p>30 dias</p>
+      <button onclick="abrirFormulario('100GB - 1150MT')">Comprar</button>
+    </div>
+  </div>
 
-<script>
-  const pacotes = [
-    { gb: 50, preco: 575 },
-    { gb: 60, preco: 690 },
-    { gb: 70, preco: 805 },
-    { gb: 80, preco: 920 },
-    { gb: 90, preco: 1035 },
-    { gb: 100, preco: 1150 },
-    { gb: 110, preco: 1265 },
-    { gb: 120, preco: 1380 },
-    { gb: 130, preco: 1495 },
-    { gb: 140, preco: 1610 },
-    { gb: 150, preco: 1725 },
-    { gb: 160, preco: 1840 }
-  ];
+  <div id="formulario">
+    <button class="button-back" onclick="voltar()">← Voltar</button>
+    <h3>Preencher Dados</h3>
+    <select>
+      <option disabled selected>Escolha o método de pagamento</option>
+      <option>M-Pesa</option>
+      <option>e-Mola</option>
+    </select>
+    <input type="text" placeholder="Seu nome">
+    <input type="text" placeholder="Seu número (M-Pesa/e-Mola)">
+    <input type="text" placeholder="Número para receber o pacote">
+    <input type="text" id="pacoteSelecionado" readonly>
+    <button>Enviar Pedido</button>
+    <p style="text-align:center; margin-top: 15px;">
+      Está com dificuldades? <a href="https://wa.me/258847347239">Fale conosco</a>
+    </p>
+  </div>
 
-  const lista = document.getElementById("lista-pacotes");
+  <footer>&copy; 2025 - Seu App de Pacotes</footer>
 
-  pacotes.forEach(p => {
-    const item = document.createElement("div");
-    item.className = "pacote";
-    item.innerHTML = `
-      <h3>${p.gb}GB - ${p.preco}MT</h3>
-      <p>Válido por 30 dias</p>
-      <p>Vodacom</p>
-      <button class="botao-comprar" onclick="mostrarPopup(${p.gb}, ${p.preco})">Comprar</button>
-    `;
-    lista.appendChild(item);
-  });
+  <script>
+    function fecharPopup() {
+      document.getElementById("popup-container").style.display = "none";
+      document.getElementById("pacotes").style.display = "grid";
+      document.body.style.overflow = "auto";
+    }
 
-  function mostrarPopup(gb, preco) {
-    document.getElementById("popupTitulo").innerText = `${gb}GB`;
-    document.getElementById("popupPreco").innerText = `Preço: ${preco}MT`;
-    document.getElementById("popupValidade").innerText = "Válido por 30 dias";
-    document.getElementById("popup").style.display = "block";
-    document.getElementById("overlay").style.display = "block";
-  }
+    function abrirFormulario(pacote) {
+      document.getElementById("pacotes").style.display = "none";
+      document.getElementById("formulario").style.display = "block";
+      document.getElementById("pacoteSelecionado").value = "Vodacom: " + pacote;
+    }
 
-  function fecharPopup() {
-    document.getElementById("popup").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
-  }
-</script>
+    function voltar() {
+      document.getElementById("formulario").style.display = "none";
+      document.getElementById("pacotes").style.display = "grid";
+    }
+  </script>
 
 </body>
 </html>
