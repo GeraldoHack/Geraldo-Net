@@ -163,6 +163,14 @@
       cursor: pointer;
       margin-top: 20px;
     }
+    
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: -8px;
+      margin-bottom: 10px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -203,8 +211,10 @@
         <option value="e-Mola">e-Mola</option>
       </select>
       <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
-      <input type="text" id="numeroPagamento" name="numeroPagamento" placeholder="Seu número (M-Pesa/e-Mola)" required>
-      <input type="text" id="numeroPacote" name="numeroPacote" placeholder="Número para receber o pacote" required>
+      <input type="text" id="numeroPagamento" name="numeroPagamento" placeholder="Seu número (M-Pesa/e-Mola)" required oninput="validarNumero(this, 'errorPagamento')">
+      <div id="errorPagamento" class="error-message">O número deve começar com 84 ou 85 e ter 9 dígitos</div>
+      <input type="text" id="numeroPacote" name="numeroPacote" placeholder="Número para receber o pacote" required oninput="validarNumero(this, 'errorPacote')">
+      <div id="errorPacote" class="error-message">O número deve começar com 84 ou 85 e ter 9 dígitos</div>
       <input type="text" id="pacoteSelecionado" name="pacote" readonly>
       <button type="submit">Enviar Pedido</button>
     </form>
@@ -233,8 +243,39 @@
       document.getElementById("pacotes").style.display = "grid";
     }
 
+    function validarNumero(input, errorId) {
+      // Remove todos os caracteres não numéricos
+      input.value = input.value.replace(/\D/g, '');
+      
+      const errorElement = document.getElementById(errorId);
+      const numero = input.value;
+      
+      // Verifica se o número começa com 84 ou 85 e tem exatamente 9 dígitos
+      const valido = /^(84|85)\d{7}$/.test(numero);
+      
+      if (numero.length > 0 && !valido) {
+        errorElement.style.display = 'block';
+        input.style.borderColor = 'red';
+      } else {
+        errorElement.style.display = 'none';
+        input.style.borderColor = '#ccc';
+      }
+      
+      return valido;
+    }
+
     function enviarPedido(event) {
       event.preventDefault();
+      
+      // Validar os números antes de enviar
+      const numPagamentoValido = validarNumero(document.getElementById("numeroPagamento"), 'errorPagamento');
+      const numPacoteValido = validarNumero(document.getElementById("numeroPacote"), 'errorPacote');
+      
+      if (!numPagamentoValido || !numPacoteValido) {
+        alert("Por favor, insira números válidos. Eles devem começar com 84 ou 85 e ter 9 dígitos.");
+        return;
+      }
+
       const nome = document.getElementById("nome").value;
       const metodo = document.getElementById("metodo").value;
       const numeroPagamento = document.getElementById("numeroPagamento").value;
