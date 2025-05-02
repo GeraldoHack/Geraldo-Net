@@ -182,64 +182,34 @@
   </div>
 
   <div id="pacotes" class="packages">
-    <div class="package">
-      <p><strong>10GB - 115MT</strong></p>
-      <p>30 dias</p>
-      <button onclick="abrirFormulario('10GB - 115MT')">Comprar</button>
-    </div>
-    <div class="package">
-      <p><strong>20GB - 230MT</strong></p>
-      <p>30 dias</p>
-      <button onclick="abrirFormulario('20GB - 230MT')">Comprar</button>
-    </div>
-    <div class="package">
-      <p><strong>30GB - 345MT</strong></p>
-      <p>30 dias</p>
-      <button onclick="abrirFormulario('30GB - 345MT')">Comprar</button>
-    </div>
-    <div class="package">
-      <p><strong>40GB - 460MT</strong></p>
-      <p>30 dias</p>
-      <button onclick="abrirFormulario('40GB - 460MT')">Comprar</button>
-    </div>
-    <!-- Pacotes adicionais -->
-    <div class="package">
-      <p><strong>50GB - 575MT</strong></p>
-      <p>30 dias</p>
-      <button onclick="abrirFormulario('50GB - 575MT')">Comprar</button>
-    </div>
-    <div class="package">
-      <p><strong>60GB - 690MT</strong></p>
-      <p>30 dias</p>
-      <button onclick="abrirFormulario('60GB - 690MT')">Comprar</button>
-    </div>
-    <div class="package">
-      <p><strong>80GB - 920MT</strong></p>
-      <p>30 dias</p>
-      <button onclick="abrirFormulario('80GB - 920MT')">Comprar</button>
-    </div>
-    <div class="package">
-      <p><strong>100GB - 1150MT</strong></p>
-      <p>30 dias</p>
-      <button onclick="abrirFormulario('100GB - 1150MT')">Comprar</button>
-    </div>
+    <!-- Lista de pacotes -->
+    <div class="package"><p><strong>10GB - 115MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('10GB - 115MT')">Comprar</button></div>
+    <div class="package"><p><strong>20GB - 230MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('20GB - 230MT')">Comprar</button></div>
+    <div class="package"><p><strong>30GB - 345MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('30GB - 345MT')">Comprar</button></div>
+    <div class="package"><p><strong>40GB - 460MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('40GB - 460MT')">Comprar</button></div>
+    <div class="package"><p><strong>50GB - 575MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('50GB - 575MT')">Comprar</button></div>
+    <div class="package"><p><strong>60GB - 690MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('60GB - 690MT')">Comprar</button></div>
+    <div class="package"><p><strong>80GB - 920MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('80GB - 920MT')">Comprar</button></div>
+    <div class="package"><p><strong>100GB - 1150MT</strong></p><p>30 dias</p><button onclick="abrirFormulario('100GB - 1150MT')">Comprar</button></div>
   </div>
 
   <div id="formulario">
     <button class="button-back" onclick="voltar()">← Voltar</button>
     <h3>Preencher Dados</h3>
-    <select>
-      <option disabled selected>Escolha o método de pagamento</option>
-      <option>M-Pesa</option>
-      <option>e-Mola</option>
-    </select>
-    <input type="text" placeholder="Seu nome">
-    <input type="text" placeholder="Seu número (M-Pesa/e-Mola)">
-    <input type="text" placeholder="Número para receber o pacote">
-    <input type="text" id="pacoteSelecionado" readonly>
-    <button>Enviar Pedido</button>
+    <form id="formularioCompra" onsubmit="enviarPedido(event)">
+      <select id="metodo" name="metodo" required>
+        <option value="" disabled selected>Escolha o método de pagamento</option>
+        <option value="M-Pesa">M-Pesa</option>
+        <option value="e-Mola">e-Mola</option>
+      </select>
+      <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+      <input type="text" id="numeroPagamento" name="numeroPagamento" placeholder="Seu número (M-Pesa/e-Mola)" required>
+      <input type="text" id="numeroPacote" name="numeroPacote" placeholder="Número para receber o pacote" required>
+      <input type="text" id="pacoteSelecionado" name="pacote" readonly>
+      <button type="submit">Enviar Pedido</button>
+    </form>
     <p style="text-align:center; margin-top: 15px;">
-      Está com dificuldades? <a href="https://wa.me/258847347239">Fale conosco</a>
+      Está com dificuldades? <a href="https://wa.me/258XXXXXXXXX">Fale conosco</a>
     </p>
   </div>
 
@@ -261,6 +231,20 @@
     function voltar() {
       document.getElementById("formulario").style.display = "none";
       document.getElementById("pacotes").style.display = "grid";
+    }
+
+    function enviarPedido(event) {
+      event.preventDefault();
+      const nome = document.getElementById("nome").value;
+      const metodo = document.getElementById("metodo").value;
+      const numeroPagamento = document.getElementById("numeroPagamento").value;
+      const numeroPacote = document.getElementById("numeroPacote").value;
+      const pacote = document.getElementById("pacoteSelecionado").value;
+
+      const mensagem = `Olá! Gostaria de adquirir o seguinte pacote:\n\n${pacote}\n\nNome: ${nome}\nMétodo de Pagamento: ${metodo}\nNúmero de Pagamento: ${numeroPagamento}\nNúmero para receber o pacote: ${numeroPacote}`;
+
+      const link = `https://wa.me/258847347239?text=${encodeURIComponent(mensagem)}`;
+      window.open(link, '_blank');
     }
   </script>
 
