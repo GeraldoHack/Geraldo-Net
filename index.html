@@ -750,4 +750,20 @@
       return;
     }
 
-    const mensagem = `*NOVA COMPRA GERALDO-NET*\n\n📦 *Pacote Selecionado:* ${pacoteSelecionado}\n\n👤 *Nome da conta:
+    const mensagem = `*NOVA COMPRA GERALDO-NET*\n\n📦 *Pacote Selecionado:* ${pacoteSelecionado}\n\n👤 *Nome da conta:* ${nome}\n📱 *Número que transferiu:* ${numeroTransferencia}\n📲 *Número que vai receber:* ${numeroDestino}\n💳 *Método de pagamento:* ${metodo}\n\n_Esta mensagem foi gerada automaticamente pelo site Geraldo-Net_`;
+    const numeroWhatsApp = "258847347239"; // Substitua pelo seu número
+
+    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+    window.open(url, "_blank");
+  }
+
+  // Mostrar pacotes diários por padrão
+  window.onload = function() {
+    if (window.location.hash !== '#popout') {
+      document.getElementById("popout").style.display = "flex";
+    }
+  };
+</script>
+
+</body>
+</html>
